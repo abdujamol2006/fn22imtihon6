@@ -72,3 +72,10 @@ a {
     width: 60px;
   }
 }
+.bookcard:hover {
+  width: 1300px;
+  height: 90px;
+}
+.trash:hover {
+  color: red;
+}

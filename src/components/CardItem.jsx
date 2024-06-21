@@ -9,11 +9,7 @@ function CardItem({ product }) {
   useEffect(() => {}, [amount]);
   return (
     <div className="">
-      <h1>Ordering page</h1>
-      <Link to="/">
-        <button className="btn btn-secondary">Back to Home</button>
-      </Link>
-      <li className="grid grid-cols-5 items-center ">
+      <li className=" bookcard grid grid-cols-5 items-center bg-base-400 shadow-xl mb-10">
         <img
           src={product.thumbnail}
           alt={product.thumbnail}
@@ -24,7 +20,7 @@ function CardItem({ product }) {
 
         <div className="flex items-center gap-4">
           <button onClick={() => deleteProduct(product.id)}>
-            <FaTrash />
+            <FaTrash className="trash" />
           </button>
           <div className="flex items-center gap-4">
             <button onClick={() => increaseAmount(product.id)} className="btn">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../context/globalContext";
@@ -49,6 +49,9 @@ function Product() {
                 </button>
                 <button onClick={handleAdd}>Add</button>
               </div>
+              <Link to="/korzinka">
+                <button className="btn">Move to bucket</button>
+              </Link>
             </div>{" "}
           </div>
         </div>
