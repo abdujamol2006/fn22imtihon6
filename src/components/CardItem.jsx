@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import { MdAddShoppingCart } from "react-icons/md";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-import { Link } from "react-router-dom";
 function CardItem({ product }) {
   const [amount, setAmount] = useState(0);
+  const [counterPrice, setCounterPrice] = useState(product.price);
   const { deleteProduct, increaseAmount, decreaseAmount } = useGlobalContext();
   useEffect(() => {}, [amount]);
+  useEffect(() => {}, [counterPrice]);
   return (
     <div className="">
       <li className=" bookcard grid grid-cols-5 items-center bg-base-400 shadow-xl mb-10">
@@ -23,15 +23,22 @@ function CardItem({ product }) {
             <FaTrash className="trash" />
           </button>
           <div className="flex items-center gap-4">
-            <button onClick={() => increaseAmount(product.id)} className="btn">
+            <button
+              onClick={() => increaseAmount(product.id, product.price)}
+              className="btn"
+            >
               +
             </button>
             <div>{product.amount}</div>
-            <button onClick={() => decreaseAmount(product.id)} className="btn">
+            <button
+              onClick={() => decreaseAmount(product.id, product.price)}
+              className="btn"
+            >
               -
             </button>
           </div>
         </div>
+        <p>{product.price}</p>
       </li>
     </div>
   );

@@ -7,6 +7,7 @@ function stateFormLocalStorage() {
       user: null,
       products: [],
       total: 0,
+      totalPrice: 0,
       isAuthChange: false,
     }
   );
@@ -25,6 +26,8 @@ const changeState = (state, action) => {
       return { ...state, products: payload };
     case "CHANGE_TOTAL":
       return { ...state, total: payload };
+    case "CHANGE_TOTAL_PRICE":
+      return { ...state, totalPrice: payload };
     default:
       return state;
   }
@@ -75,11 +78,14 @@ function GlobalContextProvider({ children }) {
   };
   //calculate
   function calculateTotal() {
+    let counterPrice = 0;
     let counter = 0;
     state.products.forEach((item) => {
       counter += item.amount;
+      counterPrice += item.price * item.amount;
     });
     dispatch({ type: "CHANGE_TOTAL", payload: counter });
+    dispatch({ type: "CHANGE_TOTAL_PRICE", payload: counterPrice });
   }
   useEffect(() => {
     calculateTotal();
