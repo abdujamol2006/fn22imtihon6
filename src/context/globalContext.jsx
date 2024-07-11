@@ -41,7 +41,7 @@ function GlobalContextProvider({ children }) {
       function toggleItem(state, prod) {
         return produce(state, (draft) => {
           const product = draft.products.find((item) => item.id === prod.id);
-          product.amount = product.amount + prod.amount;
+          product.amount = !product.amount + prod.amount;
         });
       }
       console.log(state.products);
@@ -91,9 +91,6 @@ function GlobalContextProvider({ children }) {
     calculateTotal();
   }, [state.products]);
 
-  useEffect(() => {
-    localStorage.setItem("mystore", JSON.stringify(state));
-  }, [state]);
   return (
     <GlobalContext.Provider
       value={{
