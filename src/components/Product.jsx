@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../context/globalContext";
+import toast from "react-hot-toast";
 
 function Product() {
   const { addProduct } = useContext(GlobalContext);
@@ -35,6 +36,9 @@ function Product() {
               <p>Brand: {data.brand}</p>
               <div className="flex items-center gap-4 mb-10">
                 <button
+                  disabled={
+                    amount == data.stock && true && toast.error("Out of stock")
+                  }
                   onClick={() => setAmount(amount + 1)}
                   className="btn btn-secondary"
                 >
@@ -42,6 +46,7 @@ function Product() {
                 </button>
                 <div>{amount}</div>
                 <button
+                  disabled={amount == 0 && true}
                   onClick={() => setAmount(amount - 1)}
                   className="btn btn-secondary"
                 >

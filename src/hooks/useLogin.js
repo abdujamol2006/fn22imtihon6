@@ -1,22 +1,24 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useState } from "react";
 import { auth } from "../firebase/firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useGlobalContext } from "./useGlobalContext";
-
-function useLogin() {
+import toast from "react-hot-toast";
+export const useLogin = () => {
+  const [isPending, setIsPending] = useState(false);
   const { dispatch } = useGlobalContext();
-  const signUpWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
+  const signIn = async (email, password) => {
+    setIsPending(true);
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithEmailAndPassword(auth, email, password);
       const user = result.user;
       dispatch({ type: "LOG_IN", payload: user });
-      alert("Success!!!");
+      toast.success(`Welcome ${user.displayName}`);
+      setIsPending(false);
     } catch (error) {
       const errorMessage = error.message;
-      alert("Error");
+      toast.error("Email or Password is wrong");
+      setIsPending(false);
     }
   };
-  return { signUpWithGoogle };
-}
-
-export { useLogin };
+  return { isPending, signIn };
+};

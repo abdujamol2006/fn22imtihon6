@@ -19,6 +19,7 @@ import { GlobalContext } from "./context/globalContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 // action
 import { action as RegistorAction } from "./page/Register";
+import { action as LoginAction } from "./page/Login";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 
@@ -43,7 +44,11 @@ function App() {
         },
       ],
     },
-    { path: "/login", element: user ? <Navigate to="/" /> : <Login /> },
+    {
+      path: "/login",
+      element: user ? <Navigate to="/" /> : <Login />,
+      action: LoginAction,
+    },
     {
       path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,

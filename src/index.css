@@ -6,6 +6,21 @@
   .site-container {
     @apply max-w-7xl mx-auto w-full;
   }
+  .align-elements {
+    @apply max-w-6xl mx-auto px-4;
+  }
+  .site-container {
+    @apply max-w-7xl mx-auto w-full;
+  }
+  .auth-container {
+    @apply grid grid-cols-1 lg:grid-cols-2 min-h-screen w-full;
+  }
+  .auth-left {
+    @apply hidden lg:block bg-[url('https://picsum.photos/1000/1300')] bg-cover bg-no-repeat bg-center;
+  }
+  .auth-right {
+    @apply bg-cover bg-no-repeat bg-center lg:bg-none grid place-items-center bg-[url('https://picsum.photos/1000/1300')];
+  }
 }
 #root {
   height: 100%;
@@ -72,10 +87,7 @@ a {
     width: 60px;
   }
 }
-.bookcard:hover {
-  width: 1300px;
-  height: 90px;
-}
+
 .trash:hover {
   color: red;
 }

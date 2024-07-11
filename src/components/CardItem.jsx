@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { useGlobalContext } from "../hooks/useGlobalContext";
+import toast from "react-hot-toast";
 function CardItem({ product }) {
   const [amount, setAmount] = useState(0);
   const [counterPrice, setCounterPrice] = useState(product.price);
@@ -24,6 +25,11 @@ function CardItem({ product }) {
           </button>
           <div className="flex items-center gap-4">
             <button
+              disabled={
+                product.amount == product.stock &&
+                true &&
+                toast.error("Out of stock")
+              }
               onClick={() => increaseAmount(product.id, product.price)}
               className="btn"
             >
@@ -31,6 +37,7 @@ function CardItem({ product }) {
             </button>
             <div>{product.amount}</div>
             <button
+              disabled={product.amount == 0 && true}
               onClick={() => decreaseAmount(product.id, product.price)}
               className="btn"
             >
